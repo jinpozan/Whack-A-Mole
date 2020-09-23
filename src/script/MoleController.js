@@ -44,10 +44,16 @@ export default class MoleController extends Laya.Script {
 
     randomUp(){
         var value = Math.random();
-        Laya.stage.timerOnce( value * 8000 ,this,function(){ this.isUp = true;});
+        Laya.stage.timerOnce( value * 6000 ,this,function(){ this.isUp = true;});
     }
 
     IsValidPosition(){
         return this.owner.transform.localPosition.y >= this.topPosition.y - 0.5
+    }
+
+    Knock(){
+        this.owner.transform.localPosition = this.cachedPosition;
+        this.isUp = false;
+        this.isDown = false;
     }
 }

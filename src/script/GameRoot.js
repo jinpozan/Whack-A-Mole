@@ -13,6 +13,7 @@ export default class GameRoot extends Laya.Script{
 
     onLoadSceneFinish( loadScene )
     {
+        loadScene.zOrder = -1;
         console.log("Scene Load Finish ... ")
         Laya.stage.addChild(loadScene);
 
@@ -26,8 +27,14 @@ export default class GameRoot extends Laya.Script{
             moles.getChildAt(i).addComponent(MoleController);
         }
 
+        var effect = loadScene.getChildByName("Particle");
+        var effectPrefab = Laya.Sprite3D.instantiate(effect);
+        effect.active = false;
+
         var hummerController = loadScene.getChildByName("Hummer").addComponent(HummerController);
         var camera = loadScene.getChildByName("Main Camera")
-        hummerController.initialize( camera , loadScene );
+        hummerController.initialize( camera , loadScene , effectPrefab );
+
+        
     }
 }
